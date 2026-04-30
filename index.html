@@ -4,61 +4,21 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>文字数カウンター</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <h1>文字数カウンター</h1>
-  <textarea id="text" rows="10" cols="40" autofocus></textarea>
-  <p><label><input id="count-newlines" type="checkbox" checked> 改行を含める</label></p>
-  <p><label><input id="count-spaces" type="checkbox" checked> スペースを含める</label></p>
-  <p><label><input id="count-english-words" type="checkbox"> 英単語を語数として数える</label></p>
-  <p>文字数: <output id="count">0</output></p>
+  <div id="editor"></div>
 
-  <script>
-    const text = document.getElementById("text");
-    const count = document.getElementById("count");
-    const countNewlines = document.getElementById("count-newlines");
-    const countSpaces = document.getElementById("count-spaces");
-    const countEnglishWords = document.getElementById("count-english-words");
+  <div class="options">
+    <label><input id="count-newlines" type="checkbox" checked> 改行を含める</label>
+    <label><input id="count-spaces" type="checkbox" checked> スペースを含める</label>
+    <label><input id="count-english-words" type="checkbox"> 英単語を語数として数える</label>
+  </div>
 
-    function updateCount() {
-      let value = text.value;
+  <p class="result">文字数: <output id="count">0</output></p>
 
-      if (!countNewlines.checked) {
-        value = value.replace(/[\r\n]/g, "");
-      }
-
-      if (!countSpaces.checked) {
-        value = value.replace(/[ \t　]/g, "");
-      }
-
-      count.value = countEnglishWords.checked
-        ? countWithEnglishWords(value)
-        : Array.from(value).length;
-    }
-
-    function countWithEnglishWords(value) {
-      let total = 0;
-      const englishWords = /[A-Za-z]+(?:['-][A-Za-z]+)*/g;
-      let index = 0;
-      let match;
-
-      while ((match = englishWords.exec(value)) !== null) {
-        total += countNonEnglish(value.slice(index, match.index));
-        total += 1;
-        index = match.index + match[0].length;
-      }
-
-      return total + countNonEnglish(value.slice(index));
-    }
-
-    function countNonEnglish(value) {
-      return Array.from(value.replace(/\s/g, "")).length;
-    }
-
-    text.addEventListener("input", updateCount);
-    countNewlines.addEventListener("change", updateCount);
-    countSpaces.addEventListener("change", updateCount);
-    countEnglishWords.addEventListener("change", updateCount);
-  </script>
+  <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.49.0/min/vs/loader.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>

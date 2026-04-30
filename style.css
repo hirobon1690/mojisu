@@ -1,0 +1,25 @@
+body {
+  max-width: 720px;
+  margin: 24px auto;
+  padding: 0 16px;
+  font-family: sans-serif;
+}
+
+#editor {
+  height: 320px;
+  border: 1px solid #ccc;
+}
+
+.options {
+  margin: 16px 0;
+}
+
+.options label {
+  display: block;
+  margin: 8px 0;
+}
+
+.result {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
