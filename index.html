@@ -3,20 +3,25 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>文字数カウンター</title>
+  <title>Count</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>文字数カウンター</h1>
-  <div id="editor"></div>
+  <main class="page">
+    <div id="editor"></div>
 
-  <div class="options">
-    <label><input id="count-newlines" type="checkbox" checked> 改行を含める</label>
-    <label><input id="count-spaces" type="checkbox" checked> スペースを含める</label>
-    <label><input id="count-english-words" type="checkbox"> 英単語を語数として数える</label>
-  </div>
-
-  <p class="result">文字数: <output id="count">0</output></p>
+    <div class="floating-bar">
+      <p class="result" aria-live="polite"><output id="count">0</output></p>
+      <div class="options" aria-label="カウント設定">
+        <label><input id="count-newlines" type="checkbox" checked><span>改行を含める</span></label>
+        <label><input id="count-spaces" type="checkbox" checked><span>スペースを含める</span></label>
+        <label><input id="count-english-words" type="checkbox"><span>英単語を語数として数える</span></label>
+      </div>
+    </div>
+  </main>
 
   <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.49.0/min/vs/loader.js"></script>
   <script src="script.js"></script>
