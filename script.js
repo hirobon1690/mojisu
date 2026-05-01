@@ -18,7 +18,7 @@ function updateCount() {
 }
 
 function getFilteredText() {
-  let value = editor ? editor.getValue() : "";
+  let value = normalizeLineEndings(editor ? editor.getValue() : "");
 
   if (!elements.countNewlines.checked) {
     value = value.replace(/[\r\n]/g, "");
@@ -29,6 +29,10 @@ function getFilteredText() {
   }
 
   return value;
+}
+
+function normalizeLineEndings(value) {
+  return value.replace(/\r\n?/g, "\n");
 }
 
 function countWithEnglishWords(value) {
